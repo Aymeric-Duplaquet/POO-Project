@@ -1,5 +1,7 @@
 package modele;
 
+import java.lang.reflect.InvocationTargetException;
+
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -21,7 +23,7 @@ public class Test extends Application {
 	}
 
 	@Override
-	public void start(Stage primaryStage) throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException {
+	public void start(Stage primaryStage) throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException, NoSuchMethodException, InvocationTargetException {
 		primaryStage.setTitle("Initialiser listes !");
 
 		grid.setAlignment(Pos.CENTER);
@@ -42,7 +44,7 @@ public class Test extends Application {
 
 
 
-	public void discrimination(Champ champ, int ligne) throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException{
+	public void discrimination(Champ champ, int ligne) throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException, NoSuchMethodException, InvocationTargetException{
 
 		if ((champ.getType() == Boolean.class ) || (champ.getType() == boolean.class)){
 			//A checkbox without a caption
@@ -50,6 +52,7 @@ public class Test extends Application {
 			CheckBox cb2 = new CheckBox("False");
 			cb1.setDisable(true);
 
+			
 			Label nom = new Label(champ.getNom());
 			grid.add(nom, 0, ligne);
 

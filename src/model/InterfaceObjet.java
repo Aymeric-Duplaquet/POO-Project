@@ -1,6 +1,8 @@
 package model;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Hashtable;
 
@@ -10,7 +12,7 @@ public class InterfaceObjet {
 	Object myObject;
 	Hashtable<String, Boolean> isPrivate;
 	
-	public InterfaceObjet(Object toRead)
+	public InterfaceObjet(Object toRead) throws NoSuchMethodException, SecurityException
 	{
 		myObject = toRead;
 		listChamp = new ArrayList<Champ>();
@@ -22,6 +24,27 @@ public class InterfaceObjet {
 		for(int i = 0;i<pubField.length;i++)
 		{
 			addField(new Champ(pubField[i].getType(), pubField[i].getName(), true),false);
+		}
+		//Recherche d'éventuels getteur et setteur
+		Method[] pubMeht = myClass.getMethods();
+		for(int i = 0;i<pubField.length;i++)
+		{
+			Method cur = pubMeht[i];
+			if(cur.getName().startsWith("get"))
+			{
+				
+				String nomChamp = cur.getName().substring(3);
+				if(GetChamp(nomChamp) == null)
+				{
+					Class<?> type = cur.getReturnType();
+					boolean modifiable = false;
+					if(myObject.getClass().getMethod("set"+nomChamp, type)!=null)
+					{
+						modifiable = true;
+					}
+					addField(new Champ(type, nomChamp, modifiable),true);
+				}
+			}
 		}
 	}
 	
@@ -43,7 +66,7 @@ public class InterfaceObjet {
 		return null;
 	}
 	
-	static public InterfaceObjet test()
+	static public InterfaceObjet test() throws NoSuchMethodException, SecurityException
 	{
 		/*InterfaceObjet ret = new InterfaceObjet(null);
 		Champ temp = new Champ(Integer.class, "Test",false);
@@ -65,19 +88,20 @@ public class InterfaceObjet {
 		Champ temp9 = new Champ(Character.class, "Test9",false);
 		ret.listChamp.add(temp9);
 		return ret;*/
-		return new InterfaceObjet(new TestPubField(42,true));
+		InterfaceObjet temp = new InterfaceObjet(new TestPubField(42,true));
+		return temp;
 	}
 
 	public ArrayList<Champ> getListChamp() {
 		return listChamp;
 	}
 	
-	public Object getValeurChamp(Champ c) throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException
+	public Object getValeurChamp(Champ c) throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException, NoSuchMethodException, InvocationTargetException
 	{
 		return getValeurChamp(c.getNom());
 	}
 	
-	public Object getValeurChamp(String champNom) throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException
+	public Object getValeurChamp(String champNom) throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException, NoSuchMethodException, InvocationTargetException
 	{
 		if(isPrivate.get(champNom) == false)
 		{
@@ -86,13 +110,33 @@ public class InterfaceObjet {
 		}
 		else
 		{
+			String getteurName = "get"+champNom;
+			Method temp =  myObject.getClass().getMethod(getteurName, null);
+			if(temp != null)
+			{
+				return temp.invoke(myObject, null);
+			}
 			throw new SecurityException();
 		}
 	}
 	
-	public void setValeurChamp(String champNom,Object in)
+	public void setValeurChamp(String champNom,Object in) throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException, NoSuchMethodException, InvocationTargetException
 	{
-		
+		Champ c = GetChamp(champNom);
+		if(isPrivate.get(champNom) == false)
+		{
+			Field t = myObject.getClass().getField(champNom);
+			t.set(myObject, in);
+		}
+		else if(c.modifiable == true)
+		{
+			Method setteur = myObject.getClass().getMethod("set"+c.nom, c.type);
+			if(setteur!=null)
+			{
+				setteur.invoke(myObject, in);
+			}
+			throw new SecurityException();
+		}
 	}
 	
 }
