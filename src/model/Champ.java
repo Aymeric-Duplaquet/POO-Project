@@ -4,21 +4,14 @@ public class Champ {
 	
 	Class<?> type;
 	String nom;
-	Object valeur;
+	boolean modifiable;
 	
-	
-	public Champ(Class<?> type, String nom, Object valeur) {
+	public Champ(Class<?> type, String nom,boolean modifiableIn) {
 		this.type = type;
 		this.nom = nom;
-		this.valeur = valeur;
+		this.modifiable = modifiableIn;
 	}	
 	
-	public Object getValeur() {
-		return valeur;
-	}
-	public void setValeur(Object valeur) {
-		this.valeur = valeur;
-	}
 	public Class<?> getType() {
 		return type;
 	}
