@@ -7,6 +7,12 @@ public class Champ {
 	Object valeur;
 	
 	
+	public Champ(Class<?> type, String nom, Object valeur) {
+		this.type = type;
+		this.nom = nom;
+		this.valeur = valeur;
+	}	
+	
 	public Object getValeur() {
 		return valeur;
 	}
@@ -18,11 +24,6 @@ public class Champ {
 	}
 	public String getNom() {
 		return nom;
-	}
-	public Champ(Class<?> type, String nom, Object valeur) {
-		this.type = type;
-		this.nom = nom;
-		this.valeur = valeur;
 	}
 
 }
