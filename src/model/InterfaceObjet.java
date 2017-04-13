@@ -14,37 +14,47 @@ public class InterfaceObjet {
 	
 	public InterfaceObjet(Object toRead) throws NoSuchMethodException, SecurityException
 	{
-		myObject = toRead;
-		listChamp = new ArrayList<Champ>();
-		isPrivate = new Hashtable<>();
-		
-		//Itération sur tous les champs publiques
-		Class<?> myClass = myObject.getClass();
-		Field[] pubField = myClass.getFields();
-		for(int i = 0;i<pubField.length;i++)
+		if(toRead != null)
 		{
-			addField(new Champ(pubField[i].getType(), pubField[i].getName(), true),false);
-		}
-		//Recherche d'éventuels getteur et setteur
-		Method[] pubMeht = myClass.getMethods();
-		for(int i = 0;i<pubField.length;i++)
-		{
-			Method cur = pubMeht[i];
-			if(cur.getName().startsWith("get"))
+	
+			myObject = toRead;
+			listChamp = new ArrayList<Champ>();
+			isPrivate = new Hashtable<>();
+			
+			//Itération sur tous les champs publiques
+			Class<?> myClass = myObject.getClass();
+			Field[] pubField = myClass.getFields();
+			for(int i = 0;i<pubField.length;i++)
 			{
-				
-				String nomChamp = cur.getName().substring(3);
-				if(GetChamp(nomChamp) == null)
+				if(false == java.lang.reflect.Modifier.isStatic(pubField[i].getModifiers()))
 				{
-					Class<?> type = cur.getReturnType();
-					boolean modifiable = false;
-					if(myObject.getClass().getMethod("set"+nomChamp, type)!=null)
+					addField(new Champ(pubField[i].getType(), pubField[i].getName(), true),false);
+				}
+				
+			}
+			//Recherche d'éventuels getteur et setteur
+			Method[] pubMeht = myClass.getMethods();
+			for(int i = 0;i<pubField.length;i++)
+			{
+				Method cur = pubMeht[i];
+				if(false == java.lang.reflect.Modifier.isStatic(cur.getModifiers()) && cur.getName().startsWith("get"))
+				{
+					
+					String nomChamp = cur.getName().substring(3);
+					if(GetChamp(nomChamp) == null)
 					{
-						modifiable = true;
+						Class<?> type = cur.getReturnType();
+						boolean modifiable = false;
+						Method set = myObject.getClass().getMethod("set"+nomChamp, type);
+						if(set !=null && false == java.lang.reflect.Modifier.isStatic(cur.getModifiers()))
+						{
+							modifiable = true;
+						}
+						addField(new Champ(type, nomChamp, modifiable),true);
 					}
-					addField(new Champ(type, nomChamp, modifiable),true);
 				}
 			}
+		
 		}
 	}
 	
@@ -88,7 +98,12 @@ public class InterfaceObjet {
 		Champ temp9 = new Champ(Character.class, "Test9",false);
 		ret.listChamp.add(temp9);
 		return ret;*/
+		
+		
 		InterfaceObjet temp = new InterfaceObjet(new TestPubField(42,true));
+
+		//InterfaceObjet temp = new InterfaceObjet(new Integer(5));
+		
 		return temp;
 	}
 
