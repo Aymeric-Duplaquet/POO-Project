@@ -29,7 +29,7 @@ public class InterfaceObjet {
 				if(false == java.lang.reflect.Modifier.isStatic(pubField[i].getModifiers()))
 				{
 					addField(new Champ(pubField[i].getType(), pubField[i].getName(), true),false);
-					System.out.println(pubField[i].getName());
+					//System.out.println(pubField[i].getName());
 				}
 				
 			}
