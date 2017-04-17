@@ -29,9 +29,11 @@ public class InterfaceObjet {
 				if(false == java.lang.reflect.Modifier.isStatic(pubField[i].getModifiers()))
 				{
 					addField(new Champ(pubField[i].getType(), pubField[i].getName(), true),false);
+					System.out.println(pubField[i].getName());
 				}
 				
 			}
+			
 			//Recherche d'�ventuels getteur et setteur
 			Method[] pubMeht = myClass.getMethods();
 			for(int i = 0;i<pubField.length;i++)
@@ -45,16 +47,23 @@ public class InterfaceObjet {
 					{
 						Class<?> type = cur.getReturnType();
 						boolean modifiable = false;
-						Method set = myObject.getClass().getMethod("set"+nomChamp, type);
-						if(set !=null && false == java.lang.reflect.Modifier.isStatic(cur.getModifiers()))
+						try
 						{
-							modifiable = true;
+							Method set = myObject.getClass().getMethod("set"+nomChamp, type);
+							if(set !=null && false == java.lang.reflect.Modifier.isStatic(cur.getModifiers()))
+							{
+								modifiable = true;
+							}
+							
+						}catch(NoSuchMethodException e )
+						{
+							modifiable = false;
 						}
 						addField(new Champ(type, nomChamp, modifiable),true);
 					}
 				}
 			}
-		
+			
 		}
 	}
 	
@@ -145,12 +154,17 @@ public class InterfaceObjet {
 		}
 		else if(c.modifiable == true)
 		{
-			Method setteur = myObject.getClass().getMethod("set"+c.nom, c.type);
-			if(setteur!=null)
+			try
 			{
+				Method setteur = myObject.getClass().getMethod("set"+c.nom, c.type);
 				setteur.invoke(myObject, in);
 			}
-			throw new SecurityException();
+			catch(NoSuchMethodException e)
+			{
+				throw new SecurityException();
+			}
+			
+			
 		}
 	}
 	

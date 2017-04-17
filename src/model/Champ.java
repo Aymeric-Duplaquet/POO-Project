@@ -18,5 +18,10 @@ public class Champ {
 	public String getNom() {
 		return nom;
 	}
+	
+	public boolean getModifiable()
+	{
+		return modifiable;
+	}
 
 }
