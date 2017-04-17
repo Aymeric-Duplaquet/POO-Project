@@ -36,7 +36,7 @@ public class InterfaceObjet {
 			
 			//Recherche d'�ventuels getteur et setteur
 			Method[] pubMeht = myClass.getMethods();
-			for(int i = 0;i<pubField.length;i++)
+			for(int i = 0;i<pubMeht.length;i++)
 			{
 				Method cur = pubMeht[i];
 				if(false == java.lang.reflect.Modifier.isStatic(cur.getModifiers()) && cur.getName().startsWith("get"))
