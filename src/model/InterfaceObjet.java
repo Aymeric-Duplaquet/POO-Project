@@ -21,7 +21,7 @@ public class InterfaceObjet {
 			listChamp = new ArrayList<Champ>();
 			isPrivate = new Hashtable<>();
 			
-			//Itération sur tous les champs publiques
+			//Itï¿½ration sur tous les champs publiques
 			Class<?> myClass = myObject.getClass();
 			Field[] pubField = myClass.getFields();
 			for(int i = 0;i<pubField.length;i++)
@@ -32,7 +32,7 @@ public class InterfaceObjet {
 				}
 				
 			}
-			//Recherche d'éventuels getteur et setteur
+			//Recherche d'ï¿½ventuels getteur et setteur
 			Method[] pubMeht = myClass.getMethods();
 			for(int i = 0;i<pubField.length;i++)
 			{
@@ -100,7 +100,7 @@ public class InterfaceObjet {
 		return ret;*/
 		
 		
-		InterfaceObjet temp = new InterfaceObjet(new TestPubField(42,true));
+		InterfaceObjet temp = new InterfaceObjet(new TestPubField(42,true,41.0f,(short)10,120000,(byte) 18,'a',"bonjour"/*,20.0d*/));
 
 		//InterfaceObjet temp = new InterfaceObjet(new Integer(5));
 		
