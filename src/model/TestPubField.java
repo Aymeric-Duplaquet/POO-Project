@@ -9,11 +9,11 @@ public class TestPubField {
 	public byte heyaByte;
 	public char heyaChar;
 	public String heyaString;
-//	public double heyaDouble;
+	public double heyaDouble;
 	
 	private float iAmPrivate;
 	
-	public TestPubField(int heyaInt, boolean isHeya,float heyaFloat,short heyaShort,long heyaLong,byte heyaByte, char heyaChar, String heyaString/*, double heyaDouble*/) {
+	public TestPubField(int heyaInt, boolean isHeya,float heyaFloat,short heyaShort,long heyaLong,byte heyaByte, char heyaChar, String heyaString, double heyaDouble) {
 		super();
 		this.heyaInt = heyaInt;
 		this.isHeya = isHeya;
@@ -23,7 +23,7 @@ public class TestPubField {
 		this.heyaByte=heyaByte;
 		this.heyaChar=heyaChar;
 		this.heyaString=heyaString;
-		//this.heyaDouble=heyaDouble;
+		this.heyaDouble=heyaDouble;
 		iAmPrivate = 4.3f;
 	}
 

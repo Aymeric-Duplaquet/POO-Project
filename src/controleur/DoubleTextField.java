@@ -6,10 +6,10 @@ import javafx.event.EventHandler;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 
-public class FloatTextField extends TextField {
+public class DoubleTextField extends TextField{
 	private String numericLastKey;
 
-	public FloatTextField(String stringValue) {
+	public DoubleTextField(String stringValue) {
 		super();
 		setText(stringValue);
 
@@ -68,7 +68,7 @@ public class FloatTextField extends TextField {
 			String testText = getText();
 			testText = (numericLastKey != null && numericLastKey != "") ? testText + numericLastKey : testText;
 			numericLastKey = "";
-			Float.parseFloat(testText);
+			Double.parseDouble(testText);
 		} catch (NumberFormatException ex) {
 			return false;
 		}
