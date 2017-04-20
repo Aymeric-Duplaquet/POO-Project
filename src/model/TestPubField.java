@@ -1,5 +1,7 @@
 package model;
 
+import testObject.Point2D;
+
 public class TestPubField {
 	public int heyaInt;
 	public boolean heyaBoolean;
@@ -10,8 +12,9 @@ public class TestPubField {
 	public char heyaChar;
 	public String heyaString;
 	public double heyaDouble;
+	public Point2D test;
 	
-	private int heyaIntP;
+	/*private int heyaIntP;
 	private boolean heyaBooleanP;
 	private float heyaFloatP;
 	private short heyaShortP;
@@ -29,7 +32,13 @@ public class TestPubField {
 	private byte heyaByteSP;
 	private char heyaCharSP;
 	private String heyaStringSP;
-	private double heyaDoubleSP;
+	private double heyaDoubleSP;*/
+	
+	public TestPubField()
+	{
+		heyaString = "aze";
+		test = new Point2D();
+	}
 	
 	public TestPubField(int heyaInt, boolean heyaBoolean,float heyaFloat,short heyaShort,long heyaLong,byte heyaByte, char heyaChar, String heyaString, double heyaDouble) {
 		super();
@@ -43,7 +52,7 @@ public class TestPubField {
 		this.heyaString=heyaString;
 		this.heyaDouble=heyaDouble;
 		
-		heyaIntP=1;
+		/*heyaIntP=1;
 		heyaBooleanP=false;
 		heyaFloatP=4.3f;
 		heyaShortP=25;
@@ -61,10 +70,10 @@ public class TestPubField {
 		heyaByteSP=3;
 		heyaCharSP='h';
 		heyaStringSP="Without Set";
-		heyaDoubleSP=68d;
+		heyaDoubleSP=68d;*/
 		
 	}
-
+/*
 	public int getHeyaIntP() {
 		return heyaIntP;
 	}
@@ -175,6 +184,6 @@ public class TestPubField {
 
 	public void setHeyaDoubleSP(double heyaDoubleSP) {
 		this.heyaDoubleSP = heyaDoubleSP;
-	}
+	}*/
 	
 }

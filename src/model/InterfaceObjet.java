@@ -87,26 +87,7 @@ public class InterfaceObjet {
 	
 	static public InterfaceObjet test() throws NoSuchMethodException, SecurityException
 	{
-		/*InterfaceObjet ret = new InterfaceObjet(null);
-		Champ temp = new Champ(Integer.class, "Test",false);
-		ret.listChamp.add(temp);
-		Champ temp2 = new Champ(Double.class, "Test2",false);
-		ret.listChamp.add(temp2);
-		Champ temp3 = new Champ(Boolean.class, "Test3",false);
-		ret.listChamp.add(temp3);
-		Champ temp4 = new Champ(Short.class, "Test4",false);
-		ret.listChamp.add(temp4);
-		Champ temp5 = new Champ(Long.class, "Test5",false);
-		ret.listChamp.add(temp5);
-		Champ temp6 = new Champ(Float.class, "Test6",false);
-		ret.listChamp.add(temp6);
-		Champ temp7 = new Champ(String.class, "Test7",false);
-		ret.listChamp.add(temp7);
-		Champ temp8 = new Champ(Byte.class, "Test8",false);
-		ret.listChamp.add(temp8);
-		Champ temp9 = new Champ(Character.class, "Test9",false);
-		ret.listChamp.add(temp9);
-		return ret;*/
+
 		
 		
 		InterfaceObjet temp = new InterfaceObjet(new TestPubField(42,true,41.0f,(short)10,120000,(byte) 18,'a',"bonjour",20.0d));

@@ -2,6 +2,8 @@ package vue;
 
 import java.lang.reflect.InvocationTargetException;
 
+import javax.swing.text.html.ObjectView;
+
 import controleur.ByteTextField;
 import controleur.CharTextField;
 import controleur.DoubleTextField;
@@ -23,6 +25,7 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import model.Champ;
 import model.InterfaceObjet;
+import model.TestPubField;
 
 public class Test extends Application {
 
@@ -32,27 +35,31 @@ public class Test extends Application {
 	public static void main(String[] args) {
 		launch(args);
 	}
-
-	@Override
-	public void start(Stage primaryStage) throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException, NoSuchMethodException, InvocationTargetException {
-		primaryStage.setTitle("Initialiser listes !");
-
-		
+	
+	public void newObjectView(Stage primaryStage,Object objIn) throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException, NoSuchMethodException, InvocationTargetException 
+	{
+		primaryStage.setTitle("ObjectReader");
 		grid.setAlignment(Pos.CENTER);
 		grid.setHgap(10);
 		grid.setVgap(10);
 		grid.setPadding(new Insets(25, 25, 25, 25));
 
-		currentObject = InterfaceObjet.test();
+		currentObject = new InterfaceObjet(objIn);
 
 		for (int i = 0; i < currentObject.getListChamp().size(); i++) {
 			System.out.println(currentObject.getListChamp().get(i).getNom());
 			discrimination(currentObject.getListChamp().get(i),i);
 		}
 
-		Scene scene = new Scene(grid, 2000, 2000);
+		Scene scene = new Scene(grid);
 		primaryStage.setScene(scene);
 		primaryStage.show();
+	}
+
+	@Override
+	public void start(Stage primaryStage) throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException, NoSuchMethodException, InvocationTargetException 	
+	{
+		newObjectView(primaryStage, new TestPubField());
 	}
 
 
@@ -86,6 +93,8 @@ public class Test extends Application {
 
 		else if (champ.getType() == String.class) 
 			stringDiscri(champ, ligne);
+		else
+			objectDiscri(champ,ligne);
 
 	}
 
@@ -421,5 +430,51 @@ public class Test extends Application {
 			cb2.setDisable(true);
 		}
 
+	}
+	
+	public void objectDiscri(Champ champ, int ligne) throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException, NoSuchMethodException, InvocationTargetException{
+		Label nom = new Label(champ.getNom());
+		grid.add(nom, 0, ligne);
+
+		Label lValue = new Label(currentObject.getValeurChamp(champ).toString());
+		System.out.println("Heya je suus " + currentObject.getValeurChamp(champ).toString());
+		grid.add(lValue, 1, ligne);
+
+		Button b = new Button("Ouvrir");
+		b.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent event) throws NumberFormatException {
+				Stage st = new Stage();
+				Test t = new Test();
+				try {
+					t.newObjectView(st, currentObject.getValeurChamp(champ));
+				} catch (NoSuchFieldException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (SecurityException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IllegalArgumentException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IllegalAccessException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (NoSuchMethodException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (InvocationTargetException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
+		grid.add(b, 3, ligne);
+		
+		if(!champ.getModifiable()){
+			b.setDisable(true);
+			
+		}
 	}
 }
