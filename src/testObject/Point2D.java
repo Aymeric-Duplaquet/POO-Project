@@ -24,9 +24,12 @@ public class Point2D {
 		return true;
 	}
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 
+	@Override
+	public String toString() {
+		return "Point2D [x=" + x + ", y=" + y + "]";
 	}
+	
+	
 
 }
