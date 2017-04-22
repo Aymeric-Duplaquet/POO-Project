@@ -111,7 +111,8 @@ public class Vue extends Application {
 			public void handle(ActionEvent event) {
 				try {
 					currentObject.setValeurChamp(champ.getNom(), Integer.parseInt(valeur.getText()));
-					lValue.setText(valeur.getText());
+					lValue.setText(currentObject.getValeurChamp(champ).toString());
+					valeur.setText(currentObject.getValeurChamp(champ).toString());
 					System.out.println(currentObject.getValeurChamp(champ).toString());
 				} catch (NoSuchFieldException | SecurityException | IllegalArgumentException
 						| IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
@@ -145,7 +146,8 @@ public class Vue extends Application {
 			public void handle(ActionEvent event) {
 				try {
 					currentObject.setValeurChamp(champ.getNom(), Float.parseFloat(valeur.getText()));
-					lValue.setText(valeur.getText());
+					lValue.setText(currentObject.getValeurChamp(champ).toString());
+					valeur.setText(currentObject.getValeurChamp(champ).toString());
 					System.out.println(currentObject.getValeurChamp(champ).toString());
 				} catch (NoSuchFieldException | SecurityException | IllegalArgumentException
 						| IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
@@ -179,7 +181,8 @@ public class Vue extends Application {
 			public void handle(ActionEvent event) {
 				try {
 					currentObject.setValeurChamp(champ.getNom(), Float.parseFloat(valeur.getText()));
-					lValue.setText(valeur.getText());
+					lValue.setText(currentObject.getValeurChamp(champ).toString());
+					valeur.setText(currentObject.getValeurChamp(champ).toString());
 					System.out.println(currentObject.getValeurChamp(champ).toString());
 				} catch (NoSuchFieldException | SecurityException | IllegalArgumentException
 						| IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
@@ -213,7 +216,8 @@ public class Vue extends Application {
 			public void handle(ActionEvent event) {
 				try {
 					currentObject.setValeurChamp(champ.getNom(), valeur.getText().charAt(0));
-					lValue.setText(valeur.getText());
+					lValue.setText(currentObject.getValeurChamp(champ).toString());
+					valeur.setText(currentObject.getValeurChamp(champ).toString());
 					System.out.println(currentObject.getValeurChamp(champ).toString());
 				} catch (NoSuchFieldException | SecurityException | IllegalArgumentException
 						| IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
@@ -247,7 +251,8 @@ public class Vue extends Application {
 			public void handle(ActionEvent event) throws NumberFormatException {
 				try {
 					currentObject.setValeurChamp(champ.getNom(), Short.parseShort(valeur.getText()));
-					lValue.setText(valeur.getText());
+					lValue.setText(currentObject.getValeurChamp(champ).toString());
+					valeur.setText(currentObject.getValeurChamp(champ).toString());
 					System.out.println(currentObject.getValeurChamp(champ).toString());
 				} catch (NoSuchFieldException | SecurityException | IllegalArgumentException
 						| IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
@@ -282,7 +287,8 @@ public class Vue extends Application {
 			public void handle(ActionEvent event) throws NumberFormatException {
 				try {
 					currentObject.setValeurChamp(champ.getNom(), Long.parseLong(valeur.getText()));
-					lValue.setText(valeur.getText());
+					lValue.setText(currentObject.getValeurChamp(champ).toString());
+					valeur.setText(currentObject.getValeurChamp(champ).toString());
 					System.out.println(currentObject.getValeurChamp(champ).toString());
 				} catch (NoSuchFieldException | SecurityException | IllegalArgumentException
 						| IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
@@ -316,7 +322,8 @@ public class Vue extends Application {
 			public void handle(ActionEvent event) throws NumberFormatException {
 				try {
 					currentObject.setValeurChamp(champ.getNom(), Byte.parseByte(valeur.getText()));
-					lValue.setText(valeur.getText());
+					lValue.setText(currentObject.getValeurChamp(champ).toString());
+					valeur.setText(currentObject.getValeurChamp(champ).toString());
 					System.out.println(currentObject.getValeurChamp(champ).toString());
 				} catch (NoSuchFieldException | SecurityException | IllegalArgumentException
 						| IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
@@ -350,7 +357,8 @@ public class Vue extends Application {
 			public void handle(ActionEvent event) throws NumberFormatException {
 				try {
 					currentObject.setValeurChamp(champ.getNom(), Double.parseDouble(valeur.getText()));
-					lValue.setText(valeur.getText());
+					lValue.setText(currentObject.getValeurChamp(champ).toString());
+					valeur.setText(currentObject.getValeurChamp(champ).toString());
 					System.out.println(currentObject.getValeurChamp(champ).toString());
 				} catch (NoSuchFieldException | SecurityException | IllegalArgumentException
 						| IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
@@ -393,9 +401,8 @@ public class Vue extends Application {
 			public void handle(ActionEvent event) {
 				try {
 					currentObject.setValeurChamp(champ.getNom(),true);
-					lValue.setText("true");
-					System.out.println(currentObject.getValeurChamp(champ).toString());
-					cb2.setSelected(false);
+					lValue.setText(currentObject.getValeurChamp(champ).toString());
+					cb2.setSelected(!(boolean)currentObject.getValeurChamp(champ));
 				} catch (NoSuchFieldException | SecurityException | IllegalArgumentException
 						| IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
 					// TODO Auto-generated catch block
@@ -410,9 +417,8 @@ public class Vue extends Application {
 			public void handle(ActionEvent event) {
 				try {
 					currentObject.setValeurChamp(champ.getNom(),false);
-					lValue.setText("false");
-					System.out.println(currentObject.getValeurChamp(champ).toString());
-					cb1.setSelected(false);
+					lValue.setText(currentObject.getValeurChamp(champ).toString());
+					cb1.setSelected((boolean)currentObject.getValeurChamp(champ));
 				} catch (NoSuchFieldException | SecurityException | IllegalArgumentException
 						| IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
 					// TODO Auto-generated catch block
