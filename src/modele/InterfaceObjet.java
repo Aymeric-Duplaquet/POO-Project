@@ -91,7 +91,6 @@ public class InterfaceObjet {
 	{
 
 		InterfaceObjet temp = new InterfaceObjet(new TestFields(42,true,41.0f,(short)10,120000,(byte) 18,'a',"bonjour",20.0d));
-		//InterfaceObjet temp = new InterfaceObjet(new Integer(5));
 		return temp;
 	}
 
