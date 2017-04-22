@@ -3,7 +3,9 @@ package testObject;
 public class Point2D {
 
 	public int x,y;
+	public Student stu;
 	public Point2D() {
+		this.stu=new Student();
 		x=0;y=0;
 		return;
 	}

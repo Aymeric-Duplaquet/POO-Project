@@ -2,8 +2,6 @@ package vue;
 
 import java.lang.reflect.InvocationTargetException;
 
-import javax.swing.text.html.ObjectView;
-
 import controleur.ByteTextField;
 import controleur.CharTextField;
 import controleur.DoubleTextField;
@@ -23,11 +21,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-import model.Champ;
-import model.InterfaceObjet;
-import model.TestPubField;
+import modele.Champ;
+import modele.InterfaceObjet;
+import testObject.TestFields;
 
-public class Test extends Application {
+public class Vue extends Application {
 
 	private GridPane grid = new GridPane();
 	private InterfaceObjet currentObject;
@@ -59,10 +57,8 @@ public class Test extends Application {
 	@Override
 	public void start(Stage primaryStage) throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException, NoSuchMethodException, InvocationTargetException 	
 	{
-		newObjectView(primaryStage, new TestPubField());
+		newObjectView(primaryStage, new TestFields());
 	}
-
-
 
 	public void discrimination(Champ champ, int ligne) throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException, NoSuchMethodException, InvocationTargetException{
 
@@ -113,9 +109,9 @@ public class Test extends Application {
 
 			@Override
 			public void handle(ActionEvent event) {
-				lValue.setText(valeur.getText());
 				try {
 					currentObject.setValeurChamp(champ.getNom(), Integer.parseInt(valeur.getText()));
+					lValue.setText(valeur.getText());
 					System.out.println(currentObject.getValeurChamp(champ).toString());
 				} catch (NoSuchFieldException | SecurityException | IllegalArgumentException
 						| IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
@@ -147,9 +143,9 @@ public class Test extends Application {
 
 			@Override
 			public void handle(ActionEvent event) {
-				lValue.setText(valeur.getText());
 				try {
 					currentObject.setValeurChamp(champ.getNom(), Float.parseFloat(valeur.getText()));
+					lValue.setText(valeur.getText());
 					System.out.println(currentObject.getValeurChamp(champ).toString());
 				} catch (NoSuchFieldException | SecurityException | IllegalArgumentException
 						| IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
@@ -181,9 +177,9 @@ public class Test extends Application {
 
 			@Override
 			public void handle(ActionEvent event) {
-				lValue.setText(valeur.getText());
 				try {
 					currentObject.setValeurChamp(champ.getNom(), Float.parseFloat(valeur.getText()));
+					lValue.setText(valeur.getText());
 					System.out.println(currentObject.getValeurChamp(champ).toString());
 				} catch (NoSuchFieldException | SecurityException | IllegalArgumentException
 						| IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
@@ -215,9 +211,9 @@ public class Test extends Application {
 
 			@Override
 			public void handle(ActionEvent event) {
-				lValue.setText(valeur.getText());
 				try {
 					currentObject.setValeurChamp(champ.getNom(), valeur.getText().charAt(0));
+					lValue.setText(valeur.getText());
 					System.out.println(currentObject.getValeurChamp(champ).toString());
 				} catch (NoSuchFieldException | SecurityException | IllegalArgumentException
 						| IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
@@ -249,9 +245,9 @@ public class Test extends Application {
 
 			@Override
 			public void handle(ActionEvent event) throws NumberFormatException {
-				lValue.setText(valeur.getText());
 				try {
 					currentObject.setValeurChamp(champ.getNom(), Short.parseShort(valeur.getText()));
+					lValue.setText(valeur.getText());
 					System.out.println(currentObject.getValeurChamp(champ).toString());
 				} catch (NoSuchFieldException | SecurityException | IllegalArgumentException
 						| IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
@@ -284,9 +280,9 @@ public class Test extends Application {
 
 			@Override
 			public void handle(ActionEvent event) throws NumberFormatException {
-				lValue.setText(valeur.getText());
 				try {
 					currentObject.setValeurChamp(champ.getNom(), Long.parseLong(valeur.getText()));
+					lValue.setText(valeur.getText());
 					System.out.println(currentObject.getValeurChamp(champ).toString());
 				} catch (NoSuchFieldException | SecurityException | IllegalArgumentException
 						| IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
@@ -318,9 +314,9 @@ public class Test extends Application {
 
 			@Override
 			public void handle(ActionEvent event) throws NumberFormatException {
-				lValue.setText(valeur.getText());
 				try {
 					currentObject.setValeurChamp(champ.getNom(), Byte.parseByte(valeur.getText()));
+					lValue.setText(valeur.getText());
 					System.out.println(currentObject.getValeurChamp(champ).toString());
 				} catch (NoSuchFieldException | SecurityException | IllegalArgumentException
 						| IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
@@ -352,9 +348,9 @@ public class Test extends Application {
 
 			@Override
 			public void handle(ActionEvent event) throws NumberFormatException {
-				lValue.setText(valeur.getText());
 				try {
 					currentObject.setValeurChamp(champ.getNom(), Double.parseDouble(valeur.getText()));
+					lValue.setText(valeur.getText());
 					System.out.println(currentObject.getValeurChamp(champ).toString());
 				} catch (NoSuchFieldException | SecurityException | IllegalArgumentException
 						| IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
@@ -395,9 +391,9 @@ public class Test extends Application {
 
 			@Override
 			public void handle(ActionEvent event) {
-				lValue.setText("true");
 				try {
 					currentObject.setValeurChamp(champ.getNom(),true);
+					lValue.setText("true");
 					System.out.println(currentObject.getValeurChamp(champ).toString());
 					cb2.setSelected(false);
 				} catch (NoSuchFieldException | SecurityException | IllegalArgumentException
@@ -412,9 +408,9 @@ public class Test extends Application {
 
 			@Override
 			public void handle(ActionEvent event) {
-				lValue.setText("false");
 				try {
 					currentObject.setValeurChamp(champ.getNom(),false);
+					lValue.setText("false");
 					System.out.println(currentObject.getValeurChamp(champ).toString());
 					cb1.setSelected(false);
 				} catch (NoSuchFieldException | SecurityException | IllegalArgumentException
@@ -446,7 +442,7 @@ public class Test extends Application {
 			@Override
 			public void handle(ActionEvent event) throws NumberFormatException {
 				Stage st = new Stage();
-				Test t = new Test();
+				Vue t = new Vue();
 				try {
 					t.newObjectView(st, currentObject.getValeurChamp(champ));
 				} catch (NoSuchFieldException e) {
