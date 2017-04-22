@@ -6,6 +6,8 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Hashtable;
 
+import testObject.TestPubField;
+
 public class InterfaceObjet {
 	
 	ArrayList<Champ> listChamp;
